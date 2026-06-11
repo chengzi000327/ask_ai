@@ -1,0 +1,28 @@
+{
+  "feature": "001-ask-ai-extension",
+  "version": "V0.1",
+  "phase": "implement",
+  "phaseHistory": ["specify", "clarify", "plan", "tasks"],
+  "lastCompletedTask": "T003",
+  "inProgressTask": "T004",
+  "blocked": false,
+  "blockedReason": null,
+  "lastVerification": {
+    "command": "npm run compile",
+    "result": "PASS",
+    "evidence": [
+      "quality/V0.1/evidence/tsc.txt"
+    ],
+    "at": "2026-06-11T09:31:05Z"
+  },
+  "constitutionCheck": {
+    "preResearch": "PASS 2026-06-11",
+    "postDesign": "PASS 2026-06-11"
+  },
+  "clarify": {
+    "openBlocking": 0,
+    "openNonBlocking": 0
+  },
+  "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
+  "updatedAt": "2026-06-11T09:31:05Z"
+}

@@ -1,0 +1,7 @@
+# Optional extension hooks.
+# Hooks are advisory unless optional is false.
+hooks:
+  before_analyze: []
+  after_analyze: []
+  before_implement: []
+  after_implement: []

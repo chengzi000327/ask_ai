@@ -1,0 +1,36 @@
+
+> ask-ai-extension@0.1.0 build
+> wxt build
+
+
+WXT 0.20.26
+ℹ Building chrome-mv3 for production with Vite 8.0.16
+- Preparing...
+[1G✔ Built extension in 153 ms
+  ├─ .output/chrome-mv3/manifest.json                   487 B    
+  ├─ .output/chrome-mv3/options.html                    481 B    
+  ├─ .output/chrome-mv3/sidepanel.html                  477 B    
+  ├─ .output/chrome-mv3/viewer.html                     482 B    
+  ├─ .output/chrome-mv3/background.js                   2.71 kB  
+  ├─ .output/chrome-mv3/chunks/jsx-runtime-6zEtxKMi.js  190.79 kB
+  ├─ .output/chrome-mv3/chunks/options-BysLfn47.js      240 B    
+  ├─ .output/chrome-mv3/chunks/sidepanel-BZws4x46.js    386 B    
+  ├─ .output/chrome-mv3/chunks/viewer-ChkEa8AP.js       245 B    
+  ├─ .output/chrome-mv3/content-scripts/content.js      3.46 kB  
+  ├─ .output/chrome-mv3/assets/options-DZzNazF_.css     132 B    
+  ├─ .output/chrome-mv3/assets/sidepanel-DmcnVK_b.css   272 B    
+  └─ .output/chrome-mv3/assets/viewer-I2MMNong.css      167 B    
+Σ Total size: 200.33 kB                               
+✔ Finished in 203 ms
+{
+  "manifest_version": 3,
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "permissions": [
+    "storage",
+    "sidePanel",
+    "tabs",
+    "webRequest"
+  ]
+}
