@@ -3,8 +3,8 @@
   "version": "V0.1",
   "phase": "implement",
   "phaseHistory": ["specify", "clarify", "plan", "tasks"],
-  "lastCompletedTask": "T011",
-  "inProgressTask": "T012",
+  "lastCompletedTask": "T012",
+  "inProgressTask": "T013",
   "blocked": false,
   "blockedReason": null,
   "lastVerification": {
@@ -14,7 +14,7 @@
       "quality/V0.1/evidence/unit-tests.txt",
       "quality/V0.1/evidence/tsc.txt"
     ],
-    "at": "2026-06-11T10:33:42Z"
+    "at": "2026-06-11T10:37:23Z"
   },
   "constitutionCheck": {
     "preResearch": "PASS 2026-06-11",
@@ -25,5 +25,5 @@
     "openNonBlocking": 0
   },
   "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
-  "updatedAt": "2026-06-11T10:33:42Z"
+  "updatedAt": "2026-06-11T10:37:23Z"
 }
