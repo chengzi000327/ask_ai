@@ -50,7 +50,7 @@
 
 - [x] T009 `entrypoints/background.ts`（FR-003, FR-005, FR-006, FR-008, FR-010, FR-011, TC-008, M1, M3, M7）：webRequest 嗅探 PDF → tabs.update 重定向 viewer；file:// 后缀兜底；papers 内存缓存；pendingTranslate 缓存 + TRANSLATE_PUSH 广播 + sidePanel.open；chat Port（loadSettings → Provider 分发 → delta/done/error 推送，断开即 abort）。Expected: PASS for existing baseline, then PASS after background implementation. GREEN: `npm run compile` + `npm run build`。Commit。
 - [x] T010 `entrypoints/viewer/`（FR-001, FR-002, FR-005, FR-010, FR-011, TC-005, M1, M2, M5）：PDF.js 渲染 canvas + TextLayer；单击行 → expandToSentence → TRANSLATE_REQUEST（带前后 8 行上下文）；mouseup 划选；后台全文抽取 → PAPER_LOADED；无文本层横幅；"用原生查看器打开"（BYPASS_PDF）。wxt hook 拷贝 pdf.worker。Expected: PASS after viewer implementation. GREEN: `npm run compile` + `npm run build`；manual M1/M2/M5 pending user/browser execution。Commit。
-- [ ] T011 `entrypoints/content.ts`（FR-002, FR-005, FR-010, M3, M6）：HTML 页 PAPER_LOADED 正文抽取（article/main 优先）；Alt+单击段落 + 划选 → TRANSLATE_REQUEST。GREEN: `npx tsc --noEmit` + 手工 M6。Commit。
+- [x] T011 `entrypoints/content.ts`（FR-002, FR-005, FR-010, M3, M6）：HTML 页 PAPER_LOADED 正文抽取（article/main 优先）；Alt+单击段落 + 划选 → TRANSLATE_REQUEST。Expected: PASS after content script implementation. GREEN: `npm run compile` + `npm run build`；manual M6 pending user/browser execution。Commit。
 
 ## Phase 4: User Story 3+4 - UI 层（P1/P2）
 
