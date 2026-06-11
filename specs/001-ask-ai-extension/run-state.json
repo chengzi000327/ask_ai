@@ -3,18 +3,18 @@
   "version": "V0.1",
   "phase": "implement",
   "phaseHistory": ["specify", "clarify", "plan", "tasks"],
-  "lastCompletedTask": "T008",
-  "inProgressTask": "T014",
+  "lastCompletedTask": "T014",
+  "inProgressTask": "T009",
   "blocked": false,
   "blockedReason": null,
   "lastVerification": {
-    "command": "npm test -- tests/settings.test.ts tests/sse.test.ts tests/openai-compat.test.ts tests/anthropic.test.ts tests/prompts.test.ts tests/sentence.test.ts && npm run compile",
+    "command": "npm test && npm run compile && npm run build",
     "result": "PASS",
     "evidence": [
       "quality/V0.1/evidence/unit-tests.txt",
       "quality/V0.1/evidence/tsc.txt"
     ],
-    "at": "2026-06-11T10:12:11Z"
+    "at": "2026-06-11T10:15:10Z"
   },
   "constitutionCheck": {
     "preResearch": "PASS 2026-06-11",
@@ -25,5 +25,5 @@
     "openNonBlocking": 0
   },
   "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
-  "updatedAt": "2026-06-11T10:12:11Z"
+  "updatedAt": "2026-06-11T10:15:10Z"
 }

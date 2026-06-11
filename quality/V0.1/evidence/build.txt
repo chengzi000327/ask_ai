@@ -21,7 +21,7 @@ WXT 0.20.26
   ├─ .output/chrome-mv3/assets/sidepanel-DmcnVK_b.css   272 B    
   └─ .output/chrome-mv3/assets/viewer-I2MMNong.css      167 B    
 Σ Total size: 200.33 kB                               
-✔ Finished in 203 ms
+✔ Finished in 197 ms
 {
   "manifest_version": 3,
   "side_panel": {

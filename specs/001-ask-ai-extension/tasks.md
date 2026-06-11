@@ -41,14 +41,14 @@
 - [x] T006 `providers/anthropic.ts`（FR-008, FR-011, TC-004）。Expected: FAIL before `providers/anthropic.ts` exists. Expected: PASS after Anthropic provider implementation. RED: `tests/anthropic.test.ts`（content_block_delta 解析、system 提升、x-api-key/version/direct-browser-access 头）失败 → GREEN: `npm test -- tests/anthropic.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 - [x] T007 [P] `shared/prompts.ts`（FR-004, FR-006, TC-006）。Expected: FAIL before `shared/prompts.ts` exists. Expected: PASS after prompt builders and truncation implementation. RED: `tests/prompts.test.ts`（不超预算原样、头 60% 尾 40% + 省略标记、翻译消息含标题/上下文/目标语言、讨论消息 system 含全文）失败 → GREEN: `npm test -- tests/prompts.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 - [x] T008 [P] `shared/sentence.ts`（FR-001, TC-005）。Expected: FAIL before `shared/sentence.ts` exists. Expected: PASS after sentence expansion implementation. RED: `tests/sentence.test.ts`（中间行扩句、文首无边界、连字符跨行合并、中文句号）失败 → GREEN: `npm test -- tests/sentence.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
-- [ ] T014 [P] `sidepanel-lib/sessions.ts`（FR-009, TC-007）。RED: `tests/sessions.test.ts`（fake-indexeddb：不存在返回 null、保存读回、upsert 更新）失败 → GREEN: `npm test -- tests/sessions.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
+- [x] T014 [P] `sidepanel-lib/sessions.ts`（FR-009, TC-007）。Expected: FAIL before `sidepanel-lib/sessions.ts` exists. Expected: PASS after IndexedDB session store implementation. RED: `tests/sessions.test.ts`（fake-indexeddb：不存在返回 null、保存读回、upsert 更新）失败 → GREEN: `npm test -- tests/sessions.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 
 ## Phase 3: User Story 1+2 - 翻译与讨论管道（P1）
 
 **Goal:** 点击/划选 → 卡片流式翻译；全文讨论。
 **Independent Test:** quickstart M1/M2/M3。
 
-- [ ] T009 `entrypoints/background.ts`（FR-003, FR-005, FR-006, FR-008, FR-010, FR-011, TC-008, M1, M3, M7）：webRequest 嗅探 PDF → tabs.update 重定向 viewer；file:// 后缀兜底；papers 内存缓存；pendingTranslate 缓存 + TRANSLATE_PUSH 广播 + sidePanel.open；chat Port（loadSettings → Provider 分发 → delta/done/error 推送，断开即 abort）。GREEN: `npx tsc --noEmit` + `npm run build`。Commit。
+- [ ] T009 `entrypoints/background.ts`（FR-003, FR-005, FR-006, FR-008, FR-010, FR-011, TC-008, M1, M3, M7）：webRequest 嗅探 PDF → tabs.update 重定向 viewer；file:// 后缀兜底；papers 内存缓存；pendingTranslate 缓存 + TRANSLATE_PUSH 广播 + sidePanel.open；chat Port（loadSettings → Provider 分发 → delta/done/error 推送，断开即 abort）。Expected: PASS for existing baseline, then PASS after background implementation. GREEN: `npm run compile` + `npm run build`。Commit。
 - [ ] T010 `entrypoints/viewer/`（FR-001, FR-002, FR-005, FR-010, FR-011, TC-005, M1, M2, M5）：PDF.js 渲染 canvas + TextLayer；单击行 → expandToSentence → TRANSLATE_REQUEST（带前后 8 行上下文）；mouseup 划选；后台全文抽取 → PAPER_LOADED；无文本层横幅；"用原生查看器打开"（BYPASS_PDF）。wxt hook 拷贝 pdf.worker。GREEN: build 后手工 M1/M2/M5。Commit。
 - [ ] T011 `entrypoints/content.ts`（FR-002, FR-005, FR-010, M3, M6）：HTML 页 PAPER_LOADED 正文抽取（article/main 优先）；Alt+单击段落 + 划选 → TRANSLATE_REQUEST。GREEN: `npx tsc --noEmit` + 手工 M6。Commit。
 
