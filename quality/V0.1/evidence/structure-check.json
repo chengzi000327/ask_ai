@@ -1,0 +1,150 @@
+{
+  "summary": {
+    "feature_dir": "specs/001-ask-ai-extension",
+    "quality_dir": "quality/V0.1",
+    "prd_source_ids": [
+      "PRD-S001",
+      "PRD-S002",
+      "PRD-S003",
+      "PRD-S004",
+      "PRD-S005",
+      "PRD-S006",
+      "PRD-S007",
+      "PRD-S008",
+      "PRD-S009",
+      "PRD-S010"
+    ],
+    "trace_source_ids": [
+      "PRD-S001",
+      "PRD-S002",
+      "PRD-S003",
+      "PRD-S004",
+      "PRD-S005",
+      "PRD-S006",
+      "PRD-S007",
+      "PRD-S008",
+      "PRD-S009",
+      "PRD-S010"
+    ],
+    "constitution": ".specify/memory/constitution.md",
+    "hooks": {
+      "path": ".specify/extensions.yml",
+      "before_analyze": 1,
+      "after_analyze": 1,
+      "disabled": 0
+    },
+    "template_layers": {
+      "overrides": 0,
+      "presets": 0,
+      "extensions": 0
+    },
+    "checklist": {
+      "open": 0,
+      "done": 19
+    },
+    "domain_checklists": {},
+    "run_state": {
+      "present": true,
+      "phase": "gate",
+      "lastCompletedTask": "T015"
+    },
+    "requirements": [
+      "FR-001",
+      "FR-002",
+      "FR-003",
+      "FR-004",
+      "FR-005",
+      "FR-006",
+      "FR-007",
+      "FR-008",
+      "FR-009",
+      "FR-010",
+      "FR-011",
+      "SC-001",
+      "SC-002",
+      "SC-003"
+    ],
+    "test_cases": [
+      "TC-001",
+      "TC-002",
+      "TC-003",
+      "TC-004",
+      "TC-005",
+      "TC-006",
+      "TC-007",
+      "TC-008"
+    ],
+    "task_markers": [
+      "T001",
+      "T002",
+      "T003",
+      "T004",
+      "T005",
+      "T006",
+      "T007",
+      "T008",
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015"
+    ],
+    "coverage": {
+      "requirements_total": 11,
+      "requirements_with_tasks": 11,
+      "requirements_with_matrix": 11
+    }
+  },
+  "findings": [
+    {
+      "id": "S1",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "src",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    },
+    {
+      "id": "S2",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "platform",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    },
+    {
+      "id": "S3",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "platform/clients",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    },
+    {
+      "id": "S4",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "platform/providers",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    },
+    {
+      "id": "S5",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "scripts/certification",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    },
+    {
+      "id": "S6",
+      "category": "structure",
+      "severity": "LOW",
+      "location": "test",
+      "summary": "Recommended directory is missing.",
+      "recommendation": "Create it when this project uses the corresponding layer or evidence type."
+    }
+  ]
+}

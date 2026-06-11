@@ -59,4 +59,4 @@
 
 ## Phase N: Polish and Release Evidence
 
-- [ ] T015 全量 fresh verification（FR-001..FR-011, SC-001..SC-003, TC-001..TC-008, M1..M7）：`npm test`（全绿）+ `npx tsc --noEmit` + `npm run build`；证据写入 `quality/V0.1/evidence/`；更新 TEST_REPORT.md（手工项标记 pending-user）与 RELEASE_GATE.md；`check_vibe_structure.py` 结构检查。呈现 merge/PR/keep/discard。
+- [x] T015 全量 fresh verification（FR-001..FR-011, SC-001..SC-003, TC-001..TC-008, M1..M7）：`npm test`（全绿）+ `npm run compile` + `npm run build`；证据写入 `quality/V0.1/evidence/`；更新 TEST_REPORT.md（手工项标记 pending-user）与 RELEASE_GATE.md；`check_vibe_structure.py` 结构检查。Expected: PASS for automated checks; manual true-integration pending-user. 呈现 merge/PR/keep/discard。

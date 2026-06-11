@@ -1,20 +1,22 @@
 {
   "feature": "001-ask-ai-extension",
   "version": "V0.1",
-  "phase": "implement",
-  "phaseHistory": ["specify", "clarify", "plan", "tasks"],
-  "lastCompletedTask": "T013",
-  "inProgressTask": "T015",
+  "phase": "gate",
+  "phaseHistory": ["specify", "clarify", "plan", "tasks", "implement"],
+  "lastCompletedTask": "T015",
+  "inProgressTask": null,
   "blocked": false,
   "blockedReason": null,
   "lastVerification": {
-    "command": "npm test && npm run compile && npm run build",
+    "command": "npm test && npm run compile && npm run build && check_vibe_structure.py --json",
     "result": "PASS",
     "evidence": [
       "quality/V0.1/evidence/unit-tests.txt",
-      "quality/V0.1/evidence/tsc.txt"
+      "quality/V0.1/evidence/tsc.txt",
+      "quality/V0.1/evidence/build.txt",
+      "quality/V0.1/evidence/structure-check.json"
     ],
-    "at": "2026-06-11T10:40:32Z"
+    "at": "2026-06-11T10:43:21Z"
   },
   "constitutionCheck": {
     "preResearch": "PASS 2026-06-11",
@@ -25,5 +27,5 @@
     "openNonBlocking": 0
   },
   "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
-  "updatedAt": "2026-06-11T10:40:32Z"
+  "updatedAt": "2026-06-11T10:43:21Z"
 }

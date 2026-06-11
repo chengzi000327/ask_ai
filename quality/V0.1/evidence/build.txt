@@ -6,7 +6,7 @@
 WXT 0.20.26
 ℹ Building chrome-mv3 for production with Vite 8.0.16
 - Preparing...
-[1G✔ Built extension in 244 ms
+[1G✔ Built extension in 301 ms
   ├─ .output/chrome-mv3/manifest.json                                   487 B    
   ├─ .output/chrome-mv3/options.html                                    560 B    
   ├─ .output/chrome-mv3/sidepanel.html                                  635 B    
@@ -25,4 +25,22 @@ WXT 0.20.26
   ├─ .output/chrome-mv3/assets/cursor-editorTextHighlight-kG3uUOwL.svg  5.4 kB   
   └─ .output/chrome-mv3/assets/pdf.worker-B1D2UnXD.mjs                  2.16 MB  
 Σ Total size: 3.1 MB                                                  
-✔ Finished in 298 ms
+✔ Finished in 364 ms
+{
+  "manifest_version": 3,
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_ui": {
+    "open_in_tab": false,
+    "page": "options.html"
+  },
+  "content_scripts": 1,
+  "pdf_worker": "pdf.worker-B1D2UnXD.mjs",
+  "permissions": [
+    "storage",
+    "sidePanel",
+    "tabs",
+    "webRequest"
+  ]
+}

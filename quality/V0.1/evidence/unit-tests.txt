@@ -6,15 +6,15 @@
  RUN  v3.2.6 /Users/chengzi/Documents/project_myself/ask_ai
 
  ✓ tests/prompts.test.ts (4 tests) 2ms
- ✓ tests/sentence.test.ts (4 tests) 1ms
+ ✓ tests/sentence.test.ts (4 tests) 2ms
  ✓ tests/sse.test.ts (4 tests) 5ms
  ✓ tests/settings.test.ts (3 tests) 2ms
- ✓ tests/anthropic.test.ts (2 tests) 6ms
- ✓ tests/openai-compat.test.ts (2 tests) 7ms
- ✓ tests/sessions.test.ts (3 tests) 7ms
+ ✓ tests/openai-compat.test.ts (2 tests) 8ms
+ ✓ tests/anthropic.test.ts (2 tests) 9ms
+ ✓ tests/sessions.test.ts (3 tests) 9ms
 
  Test Files  7 passed (7)
       Tests  22 passed (22)
-   Start at  18:14:47
-   Duration  239ms (transform 147ms, setup 0ms, collect 223ms, tests 30ms, environment 1ms, prepare 306ms)
+   Start at  18:41:32
+   Duration  262ms (transform 150ms, setup 0ms, collect 216ms, tests 35ms, environment 1ms, prepare 389ms)
 
