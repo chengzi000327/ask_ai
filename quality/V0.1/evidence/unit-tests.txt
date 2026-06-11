@@ -1,17 +1,18 @@
 
 > ask-ai-extension@0.1.0 test
-> vitest run tests/settings.test.ts tests/sse.test.ts tests/openai-compat.test.ts tests/anthropic.test.ts
+> vitest run tests/settings.test.ts tests/sse.test.ts tests/openai-compat.test.ts tests/anthropic.test.ts tests/prompts.test.ts
 
 
  RUN  v3.2.6 /Users/chengzi/Documents/project_myself/ask_ai
 
+ ✓ tests/prompts.test.ts (4 tests) 2ms
  ✓ tests/sse.test.ts (4 tests) 4ms
  ✓ tests/settings.test.ts (3 tests) 2ms
  ✓ tests/openai-compat.test.ts (2 tests) 6ms
  ✓ tests/anthropic.test.ts (2 tests) 6ms
 
- Test Files  4 passed (4)
-      Tests  11 passed (11)
-   Start at  18:05:25
-   Duration  207ms (transform 53ms, setup 0ms, collect 80ms, tests 19ms, environment 0ms, prepare 132ms)
+ Test Files  5 passed (5)
+      Tests  15 passed (15)
+   Start at  18:07:03
+   Duration  223ms (transform 97ms, setup 0ms, collect 144ms, tests 20ms, environment 0ms, prepare 172ms)
 
