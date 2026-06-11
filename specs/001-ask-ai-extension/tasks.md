@@ -35,7 +35,7 @@
 ## Phase 2: Foundation（纯逻辑层，全 TDD）
 
 - [x] T003 `shared/types.ts` + `shared/messages.ts`（FR-001..FR-011, TC-008）：定义 ProviderConfig/Settings/PaperContext/ChatMessage/TranslatePayload/BusMessage/ChatPortEvent（含 TRANSLATE_PUSH）。Expected: FAIL before shared contracts exist. Expected: PASS after contracts compile. GREEN: `npm run compile` 通过。Evidence: `quality/V0.1/evidence/tsc.txt`。Commit。
-- [ ] T004 [P] `shared/presets.ts`（7 家）+ `shared/settings.ts`（StorageLike 注入、预设合并）（FR-007, TC-002）。RED: `tests/settings.test.ts`（默认值/保存读回/合并补齐）失败 → GREEN: `npm test -- tests/settings.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
+- [x] T004 [P] `shared/presets.ts`（7 家）+ `shared/settings.ts`（StorageLike 注入、预设合并）（FR-007, TC-002）。Expected: FAIL before `shared/settings.ts` exists. Expected: PASS after presets/settings implementation. RED: `tests/settings.test.ts`（默认值/保存读回/合并补齐）失败 → GREEN: `npm test -- tests/settings.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 - [ ] T005a [P] `shared/sse.ts`（FR-008, TC-001）。RED: `tests/sse.test.ts`（完整事件/跨 chunk 重组/注释与 event 行忽略）失败 → GREEN: `npm test -- tests/sse.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 - [ ] T005 `providers/provider.ts` + `providers/openai-compat.ts`（FR-007, FR-008, FR-011, TC-003）。RED: `tests/openai-compat.test.ts`（流式拼接 delta、URL/头/stream 断言、401 ProviderError）失败 → GREEN: `npm test -- tests/openai-compat.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。
 - [ ] T006 `providers/anthropic.ts`（FR-008, FR-011, TC-004）。RED: `tests/anthropic.test.ts`（content_block_delta 解析、system 提升、x-api-key/version/direct-browser-access 头）失败 → GREEN: `npm test -- tests/anthropic.test.ts` 通过。Evidence: `quality/V0.1/evidence/unit-tests.txt`。Commit。

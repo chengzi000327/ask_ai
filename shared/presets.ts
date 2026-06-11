@@ -1,0 +1,60 @@
+import type { ProviderConfig } from './types';
+
+export const PROVIDER_PRESETS: ProviderConfig[] = [
+  {
+    id: 'anthropic',
+    name: 'Claude',
+    kind: 'anthropic',
+    baseUrl: 'https://api.anthropic.com',
+    apiKey: '',
+    models: ['claude-3-5-sonnet-latest', 'claude-3-5-haiku-latest'],
+  },
+  {
+    id: 'openai',
+    name: 'GPT',
+    kind: 'openai-compat',
+    baseUrl: 'https://api.openai.com/v1',
+    apiKey: '',
+    models: ['gpt-4.1-mini', 'gpt-4.1'],
+  },
+  {
+    id: 'deepseek',
+    name: 'DeepSeek',
+    kind: 'openai-compat',
+    baseUrl: 'https://api.deepseek.com/v1',
+    apiKey: '',
+    models: ['deepseek-chat', 'deepseek-reasoner'],
+  },
+  {
+    id: 'glm',
+    name: 'GLM',
+    kind: 'openai-compat',
+    baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
+    apiKey: '',
+    models: ['glm-4-plus', 'glm-4-flash'],
+  },
+  {
+    id: 'kimi',
+    name: 'Kimi',
+    kind: 'openai-compat',
+    baseUrl: 'https://api.moonshot.cn/v1',
+    apiKey: '',
+    models: ['moonshot-v1-8k', 'moonshot-v1-32k'],
+  },
+  {
+    id: 'qwen',
+    name: 'Qwen',
+    kind: 'openai-compat',
+    baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+    apiKey: '',
+    models: ['qwen-plus', 'qwen-turbo'],
+  },
+  {
+    id: 'minimax',
+    name: 'MiniMax',
+    kind: 'openai-compat',
+    baseUrl: 'https://api.minimax.chat/v1',
+    apiKey: '',
+    models: ['MiniMax-Text-01'],
+  },
+];

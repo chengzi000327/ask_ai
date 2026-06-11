@@ -1,0 +1,14 @@
+
+> ask-ai-extension@0.1.0 test
+> vitest run tests/settings.test.ts
+
+
+ RUN  v3.2.6 /Users/chengzi/Documents/project_myself/ask_ai
+
+ ✓ tests/settings.test.ts (3 tests) 2ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  17:59:40
+   Duration  249ms (transform 21ms, setup 0ms, collect 20ms, tests 2ms, environment 0ms, prepare 34ms)
+
