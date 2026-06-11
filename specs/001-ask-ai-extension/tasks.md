@@ -55,7 +55,7 @@
 ## Phase 4: User Story 3+4 - UI 层（P1/P2）
 
 - [x] T012 `entrypoints/sidepanel/`（FR-003, FR-006, FR-008, FR-009, FR-011, M1, M3, M4, M7）：App.tsx 聊天流（翻译卡片原文引用 + 流式译文、普通消息）；chat Port 客户端；TRANSLATE_PUSH 监听 + GET_PENDING_TRANSLATE 启动取件；模型下拉（仅点亮已配 key 的）；错误态（auth → 去设置按钮；retryable → 重试；断流 → 已中断标记 + 重试）；tabs.onActivated 跟随 + sessions 持久化恢复。Expected: PASS after sidepanel implementation. GREEN: `npm run compile` + `npm run build`。Commit。
-- [ ] T013 `entrypoints/options/`（FR-007, FR-008, M7）：7 家预设 key 输入、模型名列表编辑、默认模型选择、目标语言、自定义 OpenAI 兼容端点增删。GREEN: `npx tsc --noEmit` + `npm run build`。Commit。
+- [x] T013 `entrypoints/options/`（FR-007, FR-008, M7）：7 家预设 key 输入、模型名列表编辑、默认模型选择、目标语言、自定义 OpenAI 兼容端点增删。Expected: PASS after options implementation. GREEN: `npm run compile` + `npm run build`。Commit。
 
 ## Phase N: Polish and Release Evidence
 

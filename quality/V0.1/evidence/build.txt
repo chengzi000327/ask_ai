@@ -6,33 +6,23 @@
 WXT 0.20.26
 ℹ Building chrome-mv3 for production with Vite 8.0.16
 - Preparing...
-[1G✔ Built extension in 288 ms
+[1G✔ Built extension in 244 ms
   ├─ .output/chrome-mv3/manifest.json                                   487 B    
-  ├─ .output/chrome-mv3/options.html                                    481 B    
-  ├─ .output/chrome-mv3/sidepanel.html                                  556 B    
+  ├─ .output/chrome-mv3/options.html                                    560 B    
+  ├─ .output/chrome-mv3/sidepanel.html                                  635 B    
   ├─ .output/chrome-mv3/viewer.html                                     561 B    
   ├─ .output/chrome-mv3/background.js                                   19.88 kB 
   ├─ .output/chrome-mv3/chunks/jsx-runtime-6zEtxKMi.js                  190.79 kB
   ├─ .output/chrome-mv3/chunks/messages-CGsyObUG.js                     87 B     
-  ├─ .output/chrome-mv3/chunks/options-BysLfn47.js                      240 B    
-  ├─ .output/chrome-mv3/chunks/sidepanel-dJBhFLo0.js                    20.95 kB 
+  ├─ .output/chrome-mv3/chunks/options-Wip7NkHh.js                      3.01 kB  
+  ├─ .output/chrome-mv3/chunks/settings-B0HaKRXf.js                     12.26 kB 
+  ├─ .output/chrome-mv3/chunks/sidepanel-B5ZDk0zv.js                    8.77 kB  
   ├─ .output/chrome-mv3/chunks/viewer-8PhteomR.js                       413.97 kB
   ├─ .output/chrome-mv3/content-scripts/content.js                      4.63 kB  
-  ├─ .output/chrome-mv3/assets/options-DZzNazF_.css                     132 B    
+  ├─ .output/chrome-mv3/assets/options-j6tt_QDT.css                     1.14 kB  
   ├─ .output/chrome-mv3/assets/sidepanel-Dml-Cjjl.css                   1.72 kB  
   ├─ .output/chrome-mv3/assets/viewer-B1Pj--7o.css                      278.61 kB
   ├─ .output/chrome-mv3/assets/cursor-editorTextHighlight-kG3uUOwL.svg  5.4 kB   
   └─ .output/chrome-mv3/assets/pdf.worker-B1D2UnXD.mjs                  2.16 MB  
 Σ Total size: 3.1 MB                                                  
-✔ Finished in 342 ms
-{
-  "side_panel": {
-    "default_path": "sidepanel.html"
-  },
-  "permissions": [
-    "storage",
-    "sidePanel",
-    "tabs",
-    "webRequest"
-  ]
-}
+✔ Finished in 298 ms
