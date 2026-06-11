@@ -6,27 +6,30 @@
 WXT 0.20.26
 ℹ Building chrome-mv3 for production with Vite 8.0.16
 - Preparing...
-[1G✔ Built extension in 182 ms
-  ├─ .output/chrome-mv3/manifest.json                   487 B    
-  ├─ .output/chrome-mv3/options.html                    481 B    
-  ├─ .output/chrome-mv3/sidepanel.html                  477 B    
-  ├─ .output/chrome-mv3/viewer.html                     482 B    
-  ├─ .output/chrome-mv3/background.js                   19.88 kB 
-  ├─ .output/chrome-mv3/chunks/jsx-runtime-6zEtxKMi.js  190.79 kB
-  ├─ .output/chrome-mv3/chunks/options-BysLfn47.js      240 B    
-  ├─ .output/chrome-mv3/chunks/sidepanel-BZws4x46.js    386 B    
-  ├─ .output/chrome-mv3/chunks/viewer-ChkEa8AP.js       245 B    
-  ├─ .output/chrome-mv3/content-scripts/content.js      3.46 kB  
-  ├─ .output/chrome-mv3/assets/options-DZzNazF_.css     132 B    
-  ├─ .output/chrome-mv3/assets/sidepanel-DmcnVK_b.css   272 B    
-  └─ .output/chrome-mv3/assets/viewer-I2MMNong.css      167 B    
-Σ Total size: 217.5 kB                                
-✔ Finished in 227 ms
+[1G✔ Built extension in 219 ms
+  ├─ .output/chrome-mv3/manifest.json                                   487 B    
+  ├─ .output/chrome-mv3/options.html                                    481 B    
+  ├─ .output/chrome-mv3/sidepanel.html                                  477 B    
+  ├─ .output/chrome-mv3/viewer.html                                     482 B    
+  ├─ .output/chrome-mv3/background.js                                   19.88 kB 
+  ├─ .output/chrome-mv3/chunks/jsx-runtime-6zEtxKMi.js                  190.79 kB
+  ├─ .output/chrome-mv3/chunks/options-BysLfn47.js                      240 B    
+  ├─ .output/chrome-mv3/chunks/sidepanel-BZws4x46.js                    386 B    
+  ├─ .output/chrome-mv3/chunks/viewer-BOgKpHql.js                       413.98 kB
+  ├─ .output/chrome-mv3/content-scripts/content.js                      3.46 kB  
+  ├─ .output/chrome-mv3/assets/options-DZzNazF_.css                     132 B    
+  ├─ .output/chrome-mv3/assets/sidepanel-DmcnVK_b.css                   272 B    
+  ├─ .output/chrome-mv3/assets/viewer-B1Pj--7o.css                      278.61 kB
+  ├─ .output/chrome-mv3/assets/cursor-editorTextHighlight-kG3uUOwL.svg  5.4 kB   
+  └─ .output/chrome-mv3/assets/pdf.worker-B1D2UnXD.mjs                  2.16 MB  
+Σ Total size: 3.08 MB                                                 
+✔ Finished in 264 ms
 {
   "manifest_version": 3,
   "side_panel": {
     "default_path": "sidepanel.html"
   },
+  "pdf_worker": "pdf.worker-B1D2UnXD.mjs",
   "permissions": [
     "storage",
     "sidePanel",
