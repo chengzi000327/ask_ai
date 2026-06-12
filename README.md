@@ -113,6 +113,46 @@ quality/             # 测试矩阵、测试报告、发布门禁与证据
 
 技术栈：[WXT](https://wxt.dev)（MV3 扩展框架）+ React 19 + PDF.js + TypeScript + Vitest
 
+## 🏗️ 架构
+
+```mermaid
+flowchart LR
+    subgraph 页面侧
+        VW["viewer<br/>内置 PDF.js 阅读器<br/>单击整句 / 划选翻译"]
+        CS["content.ts<br/>HTML 页内容脚本<br/>Alt+单击 / 划选 / 正文抽取"]
+    end
+
+    BG["background<br/>Service Worker<br/>PDF 嗅探重定向 · 消息路由 · 模型调用"]
+
+    subgraph UI
+        SP["sidepanel<br/>侧边栏聊天<br/>翻译卡片 · 全文讨论 · Markdown 渲染"]
+        OP["options<br/>设置页<br/>API key · 模型列表 · 目标语言"]
+    end
+
+    PR["providers<br/>OpenAI 兼容 / Anthropic<br/>SSE 流式解析"]
+    LLM(["模型服务商 API"])
+    ST[("chrome.storage<br/>设置")]
+    DB[("IndexedDB<br/>按论文的会话历史")]
+
+    VW -- "TRANSLATE_REQUEST" --> BG
+    CS -- "TRANSLATE_REQUEST / PAPER_LOADED" --> BG
+    BG -- "打开侧边栏 + TRANSLATE_PUSH" --> SP
+    SP -- "chat Port（流式）" --> BG
+    BG --> PR
+    PR -- "fetch + SSE" --> LLM
+    OP --> ST
+    BG --> ST
+    SP --> DB
+```
+
+**三条关键链路：**
+
+1. **PDF 接管**：background 用 `webRequest` 嗅探响应头，发现 `application/pdf` 就把标签页重定向到内置阅读器（`viewer.html?file=原始URL`）；`file://` 本地 PDF 走后缀名兜底。点「Open native viewer」可绕过。
+2. **点击 / 划选翻译**：viewer 或 content script 发 `TRANSLATE_REQUEST` 给 background → background **先打开侧边栏**（保住用户手势），再广播 `TRANSLATE_PUSH`；若侧边栏尚未就绪，请求暂存为 pending，侧边栏挂载后通过 `GET_PENDING_TRANSLATE` 取件——保证消息不丢。
+3. **流式对话**：侧边栏通过长连接 chat Port 把消息和所选模型发给 background，background 读取设置选择对应 provider，直接 `fetch` 模型服务商 API 并解析 SSE，逐 token 推回侧边栏渲染；断开 Port 即中止请求。
+
+**分层约定**：`shared/` 是纯逻辑层（消息契约、SSE 解析、提示词构建、扩句、设置合并），不依赖任何浏览器 API，可注入可替身，单元测试全覆盖；浏览器相关代码集中在 `entrypoints/`，provider 通过注入 `fetch` 保持可测。
+
 ## 📚 文档目录
 
 <details>
