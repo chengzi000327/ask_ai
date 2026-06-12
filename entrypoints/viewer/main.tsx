@@ -170,10 +170,15 @@ async function renderPage(
   pageEl.className = 'pdf-page';
   pageEl.style.width = `${viewport.width}px`;
   pageEl.style.height = `${viewport.height}px`;
+  // PDF.js 文本层按 --scale-factor 定位字符 span；不设则按 1 排版，
+  // 文本层与画布字形错位，选中高亮对不准。
+  pageEl.style.setProperty('--scale-factor', String(viewport.scale));
 
+  // 按设备像素比渲染画布，高分屏下字形清晰、选择更跟手
+  const dpr = window.devicePixelRatio || 1;
   const canvas = document.createElement('canvas');
-  canvas.width = Math.floor(viewport.width);
-  canvas.height = Math.floor(viewport.height);
+  canvas.width = Math.floor(viewport.width * dpr);
+  canvas.height = Math.floor(viewport.height * dpr);
   canvas.style.width = `${viewport.width}px`;
   canvas.style.height = `${viewport.height}px`;
   pageEl.append(canvas);
@@ -187,6 +192,7 @@ async function renderPage(
     canvas,
     canvasContext: canvas.getContext('2d')!,
     viewport,
+    transform: dpr === 1 ? undefined : [dpr, 0, 0, dpr, 0, 0],
   }).promise;
 
   const textContent = await page.getTextContent();
