@@ -1,8 +1,16 @@
 {
   "feature": "001-ask-ai-extension",
   "version": "V0.1",
-  "phase": "gate",
-  "phaseHistory": ["specify", "clarify", "plan", "tasks", "implement"],
+  "phase": "done",
+  "phaseHistory": [
+    "specify",
+    "clarify",
+    "plan",
+    "tasks",
+    "implement",
+    "gate",
+    "done"
+  ],
   "lastCompletedTask": "T015",
   "inProgressTask": null,
   "blocked": false,
@@ -27,6 +35,6 @@
     "openBlocking": 0,
     "openNonBlocking": 0
   },
-  "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
-  "updatedAt": "2026-06-12T11:07:01Z"
+  "worktree": "merged to main on 2026-06-12 (user decision: merge); manual M1/M2/M3/M6 remain pending-user",
+  "updatedAt": "2026-06-12T11:10:00Z"
 }
