@@ -15,8 +15,12 @@ const bypassPdfUrls = new Set<string>();
 let pendingTranslate: Extract<BusMessage, { type: 'TRANSLATE_REQUEST' }> | null = null;
 
 export default defineBackground(() => {
-  chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.onInstalled.addListener((details) => {
     void chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
+    // 首次安装直接打开设置页，引导用户先配 API key（更新/重载不打扰）
+    if (details.reason === 'install') {
+      void chrome.runtime.openOptionsPage();
+    }
   });
 
   chrome.webRequest.onHeadersReceived.addListener(

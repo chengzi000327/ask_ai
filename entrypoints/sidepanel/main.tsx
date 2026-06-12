@@ -363,7 +363,26 @@ function App() {
       </header>
 
       <section className="messages">
-        {messages.length === 0 && <div className="empty">Open a paper or select text to begin.</div>}
+        {messages.length === 0 &&
+          (enabledProviders.length === 0 ? (
+            <div className="empty onboarding">
+              <p className="empty-title">👋 欢迎使用 Ask AI</p>
+              <p>先配置一个模型的 API key，就可以开始翻译和提问了。</p>
+              <button type="button" onClick={() => void chrome.runtime.openOptionsPage()}>
+                去配置模型
+              </button>
+            </div>
+          ) : (
+            <div className="empty">
+              <p className="empty-title">可以这样用：</p>
+              <ul>
+                <li>PDF 里单击任意一行，翻译整句</li>
+                <li>划选任意文字，立即翻译</li>
+                <li>网页上 ⌥ Option（Alt）+ 单击段落翻译</li>
+                <li>在下方输入框直接对全文提问</li>
+              </ul>
+            </div>
+          ))}
         {messages.map((message) => (
           <article key={message.id} className={`message ${message.kind} ${message.role}`}>
             {message.sourceText && <blockquote>{message.sourceText}</blockquote>}
