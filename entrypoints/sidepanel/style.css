@@ -1,6 +1,6 @@
 :root {
-  color: #1f2933;
-  background: #f6f7f9;
+  color: #1a1a1a;
+  background: #ffffff;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -27,7 +27,7 @@ textarea {
   gap: 10px;
   padding: 12px;
   background: #ffffff;
-  border-bottom: 1px solid #d8dde5;
+  border-bottom: 1px solid #ececee;
 }
 
 .topbar h1 {
@@ -41,7 +41,7 @@ textarea {
   display: block;
   overflow: hidden;
   margin-top: 2px;
-  color: #667085;
+  color: #8e8e93;
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -50,61 +50,63 @@ textarea {
 .topbar select {
   width: 100%;
   min-height: 34px;
-  border: 1px solid #c4cad4;
-  border-radius: 6px;
+  border: 1px solid #e0e0e3;
+  border-radius: 8px;
   background: #ffffff;
-  color: #1f2933;
+  color: #1a1a1a;
   padding: 0 8px;
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   overflow: auto;
-  padding: 12px;
+  padding: 14px 12px;
 }
 
 .empty {
-  color: #667085;
+  color: #8e8e93;
   font-size: 14px;
 }
 
 .message {
-  border: 1px solid #d8dde5;
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 10px;
+  background: transparent;
+  font-size: 14px;
 }
 
 .message.user {
   align-self: flex-end;
-  max-width: 88%;
-  background: #e9f5ef;
-  border-color: #b8dbc9;
+  max-width: 85%;
+  background: #f0f0f2;
+  border-radius: 18px;
+  padding: 10px 14px;
 }
 
 .message.assistant {
-  align-self: flex-start;
-  max-width: 96%;
+  align-self: stretch;
+  max-width: 100%;
+  background: #ffffff;
 }
 
-.message.translation {
-  border-left: 3px solid #3b82f6;
+.message.assistant + .message.assistant {
+  border-top: 1px solid #f0f0f2;
+  padding-top: 12px;
+  margin-top: 4px;
 }
 
 .message blockquote {
   margin: 0 0 8px;
-  padding-left: 8px;
-  border-left: 2px solid #a9b7ca;
-  color: #4a5565;
+  padding-left: 10px;
+  border-left: 3px solid #d9d9de;
+  color: #6e6e73;
   font-size: 13px;
 }
 
 .message p {
   margin: 0;
   white-space: pre-wrap;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
 .message footer {
@@ -112,23 +114,23 @@ textarea {
   align-items: center;
   gap: 8px;
   margin-top: 8px;
-  color: #7a3442;
+  color: #b3261e;
   font-size: 12px;
 }
 
 .message footer button {
   min-height: 32px;
-  border: 1px solid #aeb7c4;
-  border-radius: 6px;
+  border: 1px solid #e0e0e3;
+  border-radius: 8px;
   background: #ffffff;
-  color: #1f2933;
+  color: #1a1a1a;
   padding: 0 12px;
 }
 
 .composer {
   padding: 10px 12px 12px;
   background: #ffffff;
-  border-top: 1px solid #e4e8ee;
+  border-top: 1px solid #ececee;
 }
 
 .composer-box {
@@ -136,7 +138,7 @@ textarea {
   align-items: flex-end;
   gap: 8px;
   padding: 8px 8px 8px 12px;
-  border: 1px solid #d0d6df;
+  border: 1px solid #e0e0e3;
   border-radius: 14px;
   background: #ffffff;
   transition:
@@ -145,8 +147,8 @@ textarea {
 }
 
 .composer-box:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+  border-color: #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(26, 26, 26, 0.08);
 }
 
 .composer-box textarea {
@@ -161,7 +163,7 @@ textarea {
 }
 
 .composer-box textarea::placeholder {
-  color: #98a2b3;
+  color: #8e8e93;
 }
 
 .composer-box button {
@@ -173,17 +175,17 @@ textarea {
   height: 34px;
   border: none;
   border-radius: 10px;
-  background: #3b82f6;
+  background: #1a1a1a;
   color: #ffffff;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
 .composer-box button:hover:not(:disabled) {
-  background: #2f6fe0;
+  background: #333333;
 }
 
 .composer-box button:disabled {
-  background: #d4dae3;
+  background: #d4d4d8;
   cursor: default;
 }
