@@ -26,10 +26,12 @@ function App() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [paperUrl, setPaperUrl] = useState('');
   const [paperTitle, setPaperTitle] = useState('Ask AI');
+  const [zhTitle, setZhTitle] = useState('');
   const [fullText, setFullText] = useState('');
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [input, setInput] = useState('');
   const [model, setModel] = useState<ModelRef>(DEFAULT_SETTINGS.defaultModel);
+  const [modelMenuOpen, setModelMenuOpen] = useState(false);
   const messagesRef = useRef<DisplayMessage[]>([]);
   // 事件监听只在挂载时注册一次，回调一律通过 ref 读取最新值，
   // 避免 effect 因 settings/model 变化重跑（重跑会触发 restoreActiveTab 清空对话）。
@@ -37,6 +39,9 @@ function App() {
   const modelRef = useRef<ModelRef>(DEFAULT_SETTINGS.defaultModel);
   const paperUrlRef = useRef('');
   const paperTitleRef = useRef('Ask AI');
+  const zhTitleRef = useRef('');
+  // 已发起标题翻译的论文 URL，避免重复请求
+  const zhTitleRequestedRef = useRef('');
 
   useEffect(() => {
     messagesRef.current = messages;
@@ -88,6 +93,19 @@ function App() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!modelMenuOpen) {
+      return;
+    }
+    function handleOutside(event: MouseEvent) {
+      if (!(event.target instanceof Element) || !event.target.closest('.model-chip-wrap')) {
+        setModelMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, [modelMenuOpen]);
 
   const enabledProviders = useMemo(
     () => settings.providers.filter((provider) => provider.apiKey.trim().length > 0),
@@ -142,14 +160,72 @@ function App() {
     } else {
       setMessages([]);
     }
+    void ensureZhTitle(resolvedUrl, resolvedTitle, session?.zhTitle);
+  }
+
+  // 给英文论文标题补一份中文翻译，固定显示在标题下方；结果存进会话避免重复请求
+  async function ensureZhTitle(url: string, title: string, cached?: string) {
+    zhTitleRef.current = cached ?? '';
+    setZhTitle(cached ?? '');
+    if (cached) {
+      return;
+    }
+    if (!title || /[一-鿿]/.test(title) || !/[a-z]{3}/i.test(title)) {
+      return;
+    }
+    if (!settingsRef.current.providers.some((provider) => provider.apiKey.trim())) {
+      return;
+    }
+    if (zhTitleRequestedRef.current === url) {
+      return;
+    }
+    zhTitleRequestedRef.current = url;
+    try {
+      const zh = (await requestOneShot(`将这个论文标题翻译成中文，只输出译文，不要任何解释：${title}`)).trim();
+      if (zh && paperUrlRef.current === url) {
+        zhTitleRef.current = zh;
+        setZhTitle(zh);
+        void persist(messagesRef.current);
+      }
+    } catch {
+      zhTitleRequestedRef.current = '';
+    }
+  }
+
+  function requestOneShot(prompt: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const port = chrome.runtime.connect({ name: CHAT_PORT_NAME });
+      let partial = '';
+      port.onMessage.addListener((event: ChatPortEvent) => {
+        if (event.type === 'delta') {
+          partial += event.text;
+        } else if (event.type === 'done') {
+          port.disconnect();
+          resolve(event.full || partial);
+        } else {
+          port.disconnect();
+          reject(new Error(event.message));
+        }
+      });
+      port.postMessage({
+        sessionUrl: 'one-shot',
+        model: modelRef.current,
+        messages: [{ role: 'user', content: prompt }],
+      });
+    });
   }
 
   async function startTranslation(payload: TranslatePayload) {
     // ref 必须同步更新：persist 在同一个 tick 里就会用到，等 state 生效就晚了
+    const paperChanged = paperUrlRef.current !== payload.paperUrl;
     paperUrlRef.current = payload.paperUrl;
     paperTitleRef.current = payload.paperTitle;
     setPaperUrl(payload.paperUrl);
     setPaperTitle(payload.paperTitle);
+    if (paperChanged) {
+      const session = await getSession(payload.paperUrl);
+      void ensureZhTitle(payload.paperUrl, payload.paperTitle, session?.zhTitle);
+    }
     const id = crypto.randomUUID();
     const draft: DisplayMessage = {
       id,
@@ -258,6 +334,7 @@ function App() {
     await saveSession({
       url,
       title: paperTitleRef.current,
+      ...(zhTitleRef.current ? { zhTitle: zhTitleRef.current } : {}),
       model: modelRef.current,
       messages: next,
       updatedAt: Date.now(),
@@ -280,20 +357,9 @@ function App() {
   return (
     <main className="shell">
       <header className="topbar">
-        <div>
-          <h1>{paperTitle}</h1>
-          <span>{paperUrl || 'No paper loaded'}</span>
-        </div>
-        <select value={`${model.providerId}::${model.model}`} onChange={(event) => selectModel(event.target.value)}>
-          {enabledProviders.length === 0 && <option>No configured model</option>}
-          {enabledProviders.flatMap((provider) =>
-            provider.models.map((item) => (
-              <option key={`${provider.id}::${item}`} value={`${provider.id}::${item}`}>
-                {provider.name} · {item}
-              </option>
-            )),
-          )}
-        </select>
+        <h1>{paperTitle}</h1>
+        {zhTitle && <p className="zh-title">{zhTitle}</p>}
+        <span>{paperUrl || 'No paper loaded'}</span>
       </header>
 
       <section className="messages">
@@ -349,6 +415,49 @@ function App() {
               }
             }}
           />
+          <div className="model-chip-wrap">
+            <button
+              type="button"
+              className="model-chip"
+              onClick={() => {
+                if (enabledProviders.length === 0) {
+                  void chrome.runtime.openOptionsPage();
+                  return;
+                }
+                setModelMenuOpen((open) => !open);
+              }}
+            >
+              <span className="model-chip-label">
+                {enabledProviders.length === 0 ? '＋ 模型' : model.model}
+              </span>
+              <svg viewBox="0 0 12 12" width="10" height="10" fill="none" aria-hidden="true">
+                <path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+            {modelMenuOpen && (
+              <div className="model-menu">
+                {enabledProviders.flatMap((provider) =>
+                  provider.models.map((item) => {
+                    const value = `${provider.id}::${item}`;
+                    const active = model.providerId === provider.id && model.model === item;
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        className={active ? 'active' : ''}
+                        onClick={() => {
+                          selectModel(value);
+                          setModelMenuOpen(false);
+                        }}
+                      >
+                        {provider.name} · {item}
+                      </button>
+                    );
+                  }),
+                )}
+              </div>
+            )}
+          </div>
           <button type="submit" disabled={!input.trim()} aria-label="发送">
             <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">
               <path d="M2.5 17.5l15-7.5-15-7.5v5.83L13.33 10 2.5 11.67z" />

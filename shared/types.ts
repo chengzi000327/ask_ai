@@ -59,6 +59,7 @@ export interface DisplayMessage extends ChatMessage {
 export interface Session {
   url: string;
   title: string;
+  zhTitle?: string;
   messages: DisplayMessage[];
   model: ModelRef;
   updatedAt: number;

@@ -19,13 +19,13 @@ textarea {
 .shell {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  /* 固定高度：标题栏与输入区钉死，只有消息区滚动 */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .topbar {
-  display: grid;
-  gap: 10px;
-  padding: 12px;
+  padding: 12px 14px;
   background: #ffffff;
   border-bottom: 1px solid #ececee;
 }
@@ -34,13 +34,28 @@ textarea {
   margin: 0;
   font-size: 15px;
   font-weight: 650;
-  line-height: 1.3;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.topbar .zh-title {
+  margin: 4px 0 0;
+  color: #48484a;
+  font-size: 13px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .topbar span {
   display: block;
   overflow: hidden;
-  margin-top: 2px;
+  margin-top: 4px;
   color: #8e8e93;
   font-size: 12px;
   text-overflow: ellipsis;
@@ -287,7 +302,7 @@ textarea {
   color: #8e8e93;
 }
 
-.composer-box button {
+.composer-box button[type='submit'] {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -296,17 +311,89 @@ textarea {
   height: 34px;
   border: none;
   border-radius: 10px;
-  background: #1a1a1a;
-  color: #ffffff;
+  background: #fad9c2;
+  color: #c05621;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 
-.composer-box button:hover:not(:disabled) {
-  background: #333333;
+.composer-box button[type='submit']:hover:not(:disabled) {
+  background: #f5c8a8;
 }
 
-.composer-box button:disabled {
-  background: #d4d4d8;
+.composer-box button[type='submit']:disabled {
+  background: #f1f1f3;
+  color: #b9b9c0;
   cursor: default;
+}
+
+/* 输入框内的模型切换器（参考 Gemini 的 Flash ▾ 样式） */
+.model-chip-wrap {
+  position: relative;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.model-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 150px;
+  height: 34px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #6e6e73;
+  font-size: 12.5px;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.model-chip:hover {
+  background: #f1f1f3;
+}
+
+.model-chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.model-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  min-width: 210px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #ececee;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 12%);
+  padding: 5px;
+  z-index: 20;
+}
+
+.model-menu button {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #1a1a1a;
+  font-size: 13px;
+  text-align: left;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.model-menu button:hover {
+  background: #f5f5f7;
+}
+
+.model-menu button.active {
+  background: #fad9c2;
+  color: #8a3c12;
+  font-weight: 600;
 }
