@@ -12,7 +12,7 @@ export const DEFAULT_SETTINGS: Settings = {
   providers: cloneProviders(PROVIDER_PRESETS),
   defaultModel: {
     providerId: 'deepseek',
-    model: 'deepseek-chat',
+    model: 'deepseek-v4-flash',
   },
   targetLang: '中文',
 };

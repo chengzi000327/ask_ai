@@ -26,7 +26,7 @@ describe('settings', () => {
     );
     expect(settings.defaultModel).toEqual({
       providerId: 'deepseek',
-      model: 'deepseek-chat',
+      model: 'deepseek-v4-flash',
     });
   });
 

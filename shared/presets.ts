@@ -23,7 +23,7 @@ export const PROVIDER_PRESETS: ProviderConfig[] = [
     kind: 'openai-compat',
     baseUrl: 'https://api.deepseek.com/v1',
     apiKey: '',
-    models: ['deepseek-chat', 'deepseek-reasoner'],
+    models: ['deepseek-v4-flash', 'deepseek-v4-pro'],
   },
   {
     id: 'glm',
@@ -66,6 +66,8 @@ export const LEGACY_PRESET_MODELS = new Set<string>([
   'claude-3-5-haiku-latest',
   'gpt-4.1-mini',
   'gpt-4.1',
+  'deepseek-chat',
+  'deepseek-reasoner',
   'glm-4-plus',
   'glm-4-flash',
   'moonshot-v1-8k',
