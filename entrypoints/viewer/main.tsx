@@ -100,11 +100,19 @@ function ViewerApp() {
     );
   }
 
+  const lastSelectionRef = useRef<{ text: string; at: number }>({ text: '', at: 0 });
+
   async function translateSelection() {
     const text = window.getSelection()?.toString().trim();
     if (!text) {
       return;
     }
+    // 同一段选区短时间内只翻译一次（取消选区等动作可能再次触发 mouseup）
+    const now = Date.now();
+    if (text === lastSelectionRef.current.text && now - lastSelectionRef.current.at < 1500) {
+      return;
+    }
+    lastSelectionRef.current = { text, at: now };
     await chrome.runtime.sendMessage(
       createTranslateRequest({
         text,
@@ -133,6 +141,11 @@ function ViewerApp() {
         ref={containerRef}
         className="pages"
         onClick={(event) => {
+          // 同一行内拖拽划选结束时浏览器也会派发 click；
+          // 此刻仍有选区，说明这是划选（已由 mouseup 处理），不要再按整句翻译
+          if (window.getSelection()?.toString().trim()) {
+            return;
+          }
           const target = event.target as HTMLElement;
           const line = target.closest<HTMLElement>('[data-line-index]');
           const lineIndex = Number(line?.dataset.lineIndex);
