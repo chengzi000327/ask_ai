@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { getSession, saveSession } from '../../sidepanel-lib/sessions';
 import { CHAT_PORT_NAME, type BusMessage, type ChatPortEvent } from '../../shared/messages';
 import { buildDiscussionMessages, buildTranslationMessages } from '../../shared/prompts';
@@ -299,7 +301,15 @@ function App() {
         {messages.map((message) => (
           <article key={message.id} className={`message ${message.kind} ${message.role}`}>
             {message.sourceText && <blockquote>{message.sourceText}</blockquote>}
-            <p>{message.content || (message.status === 'streaming' ? '...' : '')}</p>
+            {message.role === 'assistant' ? (
+              <div className="md">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.content || (message.status === 'streaming' ? '…' : '')}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <p>{message.content}</p>
+            )}
             {message.status !== 'done' && message.status !== 'streaming' && (
               <footer>
                 <span>{message.status}</span>

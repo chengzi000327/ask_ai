@@ -51,7 +51,10 @@
       "Bash(tee quality/V0.1/evidence/smoke-browser.txt)",
       "Bash(rsync -a --delete .output/chrome-mv3/ ~/Desktop/AskAI-extension/)",
       "Bash(rsync -a --delete .output/chrome-mv3/ dist-chrome/)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(git remote *)",
+      "Bash(gh auth *)",
+      "Bash(git push *)"
     ]
   }
 }
