@@ -49,24 +49,24 @@
 
 ```bash
 npm install
-npm run build        # 产出 .output/chrome-mv3/
+npm run build        # 构建并自动同步到 dist-chrome/（供 Chrome 加载的可见目录）
 ```
 
-**加载扩展：**
+**加载扩展**：
 
 1. Chrome 打开 `chrome://extensions`，开启右上角「开发者模式」
-2. 点「加载已解压的扩展程序」，选择 `.output/chrome-mv3/` 目录
-   > 💡 macOS 文件选择框默认隐藏点开头的文件夹，按 `Cmd+Shift+G` 直接输入完整路径即可
+2. 点「加载已解压的扩展程序」，选择项目下的 **`dist-chrome/`** 目录
+   > 💡 之所以不直接加载构建原始产物 `.output/chrome-mv3/`，是因为 macOS 文件选择框默认隐藏点开头的文件夹；`dist-chrome/` 是构建后自动同步的一份可见副本，内容完全相同
 3. 在扩展的 Options 页填入至少一家模型的 API key，选好默认模型和目标语言
 4. 本地 PDF（`file://`）场景需在扩展详情页开启「允许访问文件网址」
 
-**一分钟体验：** 打开 <https://arxiv.org/pdf/1706.03762>，单击正文任意一行 → 侧边栏弹出流式中文翻译 🎉
+**一分钟体验**：打开 <https://arxiv.org/pdf/1706.03762>，单击正文任意一行 → 侧边栏弹出流式中文翻译 🎉
 
 > **更新与移除**：改完代码 `npm run build` 后，在 `chrome://extensions` 点扩展卡片的刷新 ⟳ 即可生效，不必移除重装；移除扩展会清空 `chrome.storage`，API key 需要重填。
 
 ## 📖 使用方法
 
-**四种核心操作：**
+**四种核心操作**：
 
 | 操作 | 触发方式 |
 |---|---|
@@ -75,7 +75,7 @@ npm run build        # 产出 .output/chrome-mv3/
 | HTML 段落翻译 | 网页上 **Alt+单击**（Mac：⌥ Option+单击）段落 |
 | 全文讨论 | 侧边栏输入框直接提问（`Enter` 发送，`Shift+Enter` 换行） |
 
-**打开侧边栏的三种方式：**
+**打开侧边栏的三种方式**：
 
 - 点正文触发翻译时自动弹出
 - 点工具栏的 Ask AI 图标（首次可在拼图菜单 🧩 里点 📌 固定到工具栏）
