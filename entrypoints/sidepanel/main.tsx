@@ -25,7 +25,7 @@ import './style.css';
 function App() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [paperUrl, setPaperUrl] = useState('');
-  const [paperTitle, setPaperTitle] = useState('Ask AI');
+  const [paperTitle, setPaperTitle] = useState('英文论文阅读助手');
   const [zhTitle, setZhTitle] = useState('');
   const [fullText, setFullText] = useState('');
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
@@ -38,7 +38,7 @@ function App() {
   const settingsRef = useRef<Settings>(DEFAULT_SETTINGS);
   const modelRef = useRef<ModelRef>(DEFAULT_SETTINGS.defaultModel);
   const paperUrlRef = useRef('');
-  const paperTitleRef = useRef('Ask AI');
+  const paperTitleRef = useRef('英文论文阅读助手');
   const zhTitleRef = useRef('');
   // 已发起标题翻译的论文 URL，避免重复请求
   const zhTitleRequestedRef = useRef('');
@@ -366,7 +366,7 @@ function App() {
         {messages.length === 0 &&
           (enabledProviders.length === 0 ? (
             <div className="empty onboarding">
-              <p className="empty-title">👋 欢迎使用 Ask AI</p>
+              <p className="empty-title">👋 欢迎使用英文论文阅读助手</p>
               <p>先配置一个模型的 API key，就可以开始翻译和提问了。</p>
               <button type="button" onClick={() => void chrome.runtime.openOptionsPage()}>
                 去配置模型

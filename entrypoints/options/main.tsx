@@ -108,7 +108,7 @@ function OptionsApp() {
     <main className="options">
       <header className="header">
         <div>
-          <h1>Ask AI Settings</h1>
+          <h1>英文论文阅读助手 · 设置</h1>
           <p>API keys stay in chrome.storage.local.</p>
         </div>
         <div className="save-area">

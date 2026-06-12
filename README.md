@@ -1,8 +1,8 @@
 <div align="center">
 
-# 📖 Ask AI
+# 📖 英文论文阅读助手
 
-**论文阅读 AI 助手 · Chrome 扩展**
+**Ask AI · Chrome 扩展**
 
 在 PDF 和 HTML 页面上点击 / 划选即可流式翻译，侧边栏支持基于全文的 AI 讨论
 
