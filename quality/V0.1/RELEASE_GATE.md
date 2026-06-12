@@ -8,14 +8,15 @@
 - [x] Secret scan passed: no real secrets found; fixture strings are documented in `secret-scan.txt`
 - [x] Untested scope documented
 - [x] Worktree clean after final gate commit (verified 2026-06-12: `git status` clean at `a673bf0`, re-verified after fresh baseline)
-- [ ] True-integration P0 manual cases pass: M1, M2, M3, M6 are pending-user
+- [x] True-integration P0 manual cases pass: M1, M2, M3, M6 user-verified in real Chrome with real provider keys (2026-06-12, see TEST_REPORT.md)
 
-## Fresh Verification (2026-06-12 resume baseline)
+## Fresh Verification (2026-06-12, re-run after each fix through `d4e3169`)
 
 - `npm test`: 22/22 passed (7 files)
 - `npm run compile`: PASS (tsc --noEmit, no errors)
-- `npm run build`: PASS (.output/chrome-mv3, 3.1 MB)
+- `npm run build`: PASS (.output/chrome-mv3, 3.11 MB)
+- Playwright real-browser smoke: PDF redirect -> text layer -> click -> TRANSLATE_REQUEST -> side panel opened (`evidence/smoke-browser.txt`); HTML Alt-click pipeline likewise verified
 
 ## Decision
 
-Not release-ready yet. Automated quality gate is green and re-verified on 2026-06-12; browser manual P0 true-integration cases (M1, M2, M3, M6) remain pending-user. See `specs/001-ask-ai-extension/quickstart.md` for manual verification steps.
+**Release-ready (V0.1).** Automated gate green; all P0 true-integration manual cases pass. Residual risk: P1 cases M4 (tab-follow restore), M5 (local file:// PDF), M7 (full error-state matrix) untested — track for V0.2.
