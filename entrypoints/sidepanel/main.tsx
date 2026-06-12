@@ -3,7 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { getSession, saveSession } from '../../sidepanel-lib/sessions';
 import { CHAT_PORT_NAME, type BusMessage, type ChatPortEvent } from '../../shared/messages';
 import { buildDiscussionMessages, buildTranslationMessages } from '../../shared/prompts';
-import { DEFAULT_SETTINGS, loadSettings, type StorageLike } from '../../shared/settings';
+import {
+  DEFAULT_SETTINGS,
+  SETTINGS_STORAGE_KEY,
+  loadSettings,
+  type StorageLike,
+} from '../../shared/settings';
 import type {
   ChatMessage,
   DisplayMessage,
@@ -34,6 +39,24 @@ function App() {
       setSettings(loaded);
       setModel(loaded.defaultModel);
     });
+
+    // 设置页保存后，已打开的侧边栏实时跟进新设置
+    function handleStorageChanged(
+      changes: Record<string, chrome.storage.StorageChange>,
+      area: string,
+    ) {
+      if (area !== 'local' || !changes[SETTINGS_STORAGE_KEY]) {
+        return;
+      }
+      void loadSettings(chromeStorage).then((loaded) => {
+        setSettings(loaded);
+        setModel(loaded.defaultModel);
+      });
+    }
+    chrome.storage.onChanged.addListener(handleStorageChanged);
+    return () => {
+      chrome.storage.onChanged.removeListener(handleStorageChanged);
+    };
   }, []);
 
   useEffect(() => {

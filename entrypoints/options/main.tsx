@@ -7,6 +7,7 @@ import './style.css';
 function OptionsApp() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   useEffect(() => {
     void loadSettings(chromeStorage).then(setSettings);
@@ -93,8 +94,14 @@ function OptionsApp() {
     if (!settings) {
       return;
     }
-    await saveSettings(chromeStorage, settings);
-    setSaved(true);
+    try {
+      await saveSettings(chromeStorage, settings);
+      setSaved(true);
+      setSaveError('');
+    } catch (error) {
+      setSaved(false);
+      setSaveError(error instanceof Error ? error.message : String(error));
+    }
   }
 
   return (
@@ -104,9 +111,13 @@ function OptionsApp() {
           <h1>Ask AI Settings</h1>
           <p>API keys stay in chrome.storage.local.</p>
         </div>
-        <button type="button" onClick={() => void persist()}>
-          Save
-        </button>
+        <div className="save-area">
+          <button type="button" onClick={() => void persist()}>
+            Save
+          </button>
+          {saved && <span className="save-ok">已保存 ✓</span>}
+          {saveError && <span className="save-error">保存失败: {saveError}</span>}
+        </div>
       </header>
 
       <section className="panel">

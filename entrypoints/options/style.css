@@ -110,3 +110,19 @@ input:disabled {
     grid-template-columns: 1fr;
   }
 }
+
+.save-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-ok {
+  color: #2e7d32;
+  font-size: 13px;
+}
+
+.save-error {
+  color: #c62828;
+  font-size: 13px;
+}
