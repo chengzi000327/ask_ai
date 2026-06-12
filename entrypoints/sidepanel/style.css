@@ -116,8 +116,7 @@ textarea {
   font-size: 12px;
 }
 
-.message footer button,
-.composer button {
+.message footer button {
   min-height: 32px;
   border: 1px solid #aeb7c4;
   border-radius: 6px;
@@ -127,19 +126,64 @@ textarea {
 }
 
 .composer {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
-  padding: 12px;
+  padding: 10px 12px 12px;
   background: #ffffff;
-  border-top: 1px solid #d8dde5;
+  border-top: 1px solid #e4e8ee;
 }
 
-.composer textarea {
-  resize: vertical;
-  min-height: 42px;
+.composer-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #d0d6df;
+  border-radius: 14px;
+  background: #ffffff;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.composer-box:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+}
+
+.composer-box textarea {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 6px 0;
   max-height: 140px;
-  border: 1px solid #c4cad4;
-  border-radius: 6px;
-  padding: 8px;
+  background: transparent;
+  line-height: 1.45;
+}
+
+.composer-box textarea::placeholder {
+  color: #98a2b3;
+}
+
+.composer-box button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.composer-box button:hover:not(:disabled) {
+  background: #2f6fe0;
+}
+
+.composer-box button:disabled {
+  background: #d4dae3;
+  cursor: default;
 }
