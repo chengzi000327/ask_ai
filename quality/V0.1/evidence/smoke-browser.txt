@@ -1,0 +1,5 @@
+TARGET LINE: {"idx":"36","text":"The dominant sequence transduction models are based on compl"}
+PAGE: CLICKTARGET: SPAN lineIndex= 36
+PAGE: SENDMSG: {"type":"TRANSLATE_REQUEST","text":"com Abstract The dominant sequence transduction models are based on complex recurrent or convolutional neural netw
+PAGE: SENDMSG: {"type":"PAPER_LOADED","url":"https://arxiv.org/pdf/1706.03762","title":"1706.03762","fullText":"Provided proper attribution is provided, Google hereb
+CONTEXTS: ["BACKGROUND","TAB","SIDE_PANEL"]

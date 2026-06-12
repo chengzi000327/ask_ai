@@ -75,10 +75,12 @@ async function handleMessage(message: BusMessage, sender: chrome.runtime.Message
       return papers.get(message.url) ?? null;
     case 'TRANSLATE_REQUEST': {
       pendingTranslate = message;
-      await broadcastTranslate(message);
+      // 必须先 open：侧边栏未打开时广播没有接收方会抛错，且 open 依赖用户手势上下文，
+      // 任何前置 await 都可能让手势失效。
       if (sender.tab?.id !== undefined) {
         await chrome.sidePanel.open({ tabId: sender.tab.id });
       }
+      await broadcastTranslate(message);
       return;
     }
     case 'TRANSLATE_PUSH':
@@ -162,11 +164,24 @@ function toErrorEvent(error: unknown): ChatPortEvent {
 
 async function broadcastTranslate(payload: Extract<BusMessage, { type: 'TRANSLATE_REQUEST' }>) {
   const { type: _type, ...translatePayload } = payload;
-  await sendTranslatePush(translatePayload);
+  const delivered = await sendTranslatePush(translatePayload);
+  if (delivered) {
+    // 侧边栏已在线并收到了这次推送，清掉 pending，避免下次打开侧边栏时重放旧翻译。
+    pendingTranslate = null;
+  }
 }
 
-async function sendTranslatePush(payload: Extract<BusMessage, { type: 'TRANSLATE_PUSH' }>['payload']) {
-  await chrome.runtime.sendMessage({ type: 'TRANSLATE_PUSH', payload } satisfies BusMessage);
+async function sendTranslatePush(
+  payload: Extract<BusMessage, { type: 'TRANSLATE_PUSH' }>['payload'],
+): Promise<boolean> {
+  try {
+    await chrome.runtime.sendMessage({ type: 'TRANSLATE_PUSH', payload } satisfies BusMessage);
+    return true;
+  } catch {
+    // 侧边栏尚未打开（无接收方）时 sendMessage 会抛错；刚 open 的侧边栏
+    // 会通过 GET_PENDING_TRANSLATE 取件，这里吞掉错误即可。
+    return false;
+  }
 }
 
 function viewerUrl(url: string): string {

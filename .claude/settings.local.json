@@ -46,7 +46,11 @@
       "Read(//Users/chengzi/Desktop/AskAI-extension/**)",
       "Bash(open ~/Desktop)",
       "Skill(claude-api)",
-      "Bash(cp -R .output/chrome-mv3 ~/Desktop/AskAI-extension)"
+      "Bash(cp -R .output/chrome-mv3 ~/Desktop/AskAI-extension)",
+      "Bash(npx playwright *)",
+      "Bash(tee quality/V0.1/evidence/smoke-browser.txt)",
+      "Bash(rsync -a --delete .output/chrome-mv3/ ~/Desktop/AskAI-extension/)",
+      "Bash(rsync -a --delete .output/chrome-mv3/ dist-chrome/)"
     ]
   }
 }

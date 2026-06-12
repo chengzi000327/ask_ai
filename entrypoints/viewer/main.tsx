@@ -27,6 +27,10 @@ function ViewerApp() {
   const [hasTextLayer, setHasTextLayer] = useState(true);
 
   const allLines = useMemo(() => pages.flatMap((page) => page.lines), [pages]);
+  // 点击处理从 ref 读行文本：渲染是逐页异步追加的，必须让已渲染的页面立即可点，
+  // 不能等全部页面渲染完才更新 state。
+  const allLinesRef = useRef<string[]>([]);
+  allLinesRef.current = allLines;
 
   useEffect(() => {
     if (!paperUrl || !containerRef.current) {
@@ -55,11 +59,14 @@ function ViewerApp() {
         }
         renderedPages.push(pageState);
         fullTextParts.push(pageState.lines.join('\n'));
+        // 逐页更新，已渲染页面立即可点击翻译
+        setPages([...renderedPages]);
+        if (pageNumber === 1) {
+          setStatus('');
+        }
       }
 
-      setPages(renderedPages);
       setHasTextLayer(renderedPages.some((page) => page.lines.length > 0));
-      setStatus('');
       await chrome.runtime.sendMessage({
         type: 'PAPER_LOADED',
         url: paperUrl,
@@ -78,14 +85,15 @@ function ViewerApp() {
   }, [paperUrl]);
 
   async function translateLine(globalLineIndex: number) {
-    const text = expandToSentence(allLines, globalLineIndex);
+    const lines = allLinesRef.current;
+    const text = expandToSentence(lines, globalLineIndex);
     if (!text) {
       return;
     }
     await chrome.runtime.sendMessage(
       createTranslateRequest({
         text,
-        context: contextAround(allLines, globalLineIndex),
+        context: contextAround(lines, globalLineIndex),
         paperUrl,
         paperTitle: title,
       }),
@@ -169,15 +177,16 @@ async function renderPage(
   }).promise;
 
   const textContent = await page.getTextContent();
+  // textDivs 与 textContent.items 一一对应（含空白项）。lines 只收非空文本，
+  // 所以 data-line-index 必须按"非空项的序号"分配，否则索引与 lines 错位。
   const lines: string[] = [];
-  for (const item of textContent.items) {
-    if (isTextItem(item)) {
-      const line = item.str.trim();
-      if (line) {
-        lines.push(line);
-      }
+  const itemLineIndex: (number | null)[] = textContent.items.map((item) => {
+    if (isTextItem(item) && item.str.trim()) {
+      lines.push(item.str.trim());
+      return lines.length - 1;
     }
-  }
+    return null;
+  });
   const lineOffset = Number(container.dataset.lineCount ?? '0');
   container.dataset.lineCount = String(lineOffset + lines.length);
 
@@ -188,7 +197,10 @@ async function renderPage(
   });
   await textLayer.render();
   textLayer.textDivs.forEach((div, index) => {
-    div.dataset.lineIndex = String(lineOffset + index);
+    const localIndex = itemLineIndex[index];
+    if (localIndex !== null && localIndex !== undefined) {
+      div.dataset.lineIndex = String(lineOffset + localIndex);
+    }
   });
 
   pageEl.dataset.paperUrl = paperUrl;
