@@ -4,7 +4,9 @@ import type { Fetcher } from './provider';
 import { ProviderError } from './provider';
 
 export class OpenAICompatProvider implements Provider {
-  constructor(private readonly fetcher: Fetcher = fetch) {}
+  // fetch 必须绑定全局：以 this.fetcher() 调用时 this 是 provider 实例，
+  // 未绑定的原生 fetch 会抛 "Illegal invocation"。
+  constructor(private readonly fetcher: Fetcher = fetch.bind(globalThis)) {}
 
   async chat(opts: ChatOptions): Promise<string> {
     const init: RequestInit = {
