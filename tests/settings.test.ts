@@ -38,7 +38,7 @@ describe('settings', () => {
       providers: DEFAULT_SETTINGS.providers.map((provider) =>
         provider.id === 'openai' ? { ...provider, apiKey: 'sk-test' } : provider,
       ),
-      defaultModel: { providerId: 'openai', model: 'gpt-4.1-mini' },
+      defaultModel: { providerId: 'openai', model: 'gpt-5.5' },
     };
 
     await saveSettings(storage, next);
@@ -55,7 +55,7 @@ describe('settings', () => {
         {
           ...PROVIDER_PRESETS[0]!,
           apiKey: 'anthropic-key',
-          models: ['claude-custom'],
+          models: ['claude-3-5-sonnet-latest', 'claude-custom'],
         },
         {
           id: 'custom-local',
@@ -74,9 +74,10 @@ describe('settings', () => {
     expect(settings.targetLang).toBe('日本語');
     expect(settings.defaultModel).toEqual(stored.defaultModel);
     expect(settings.providers).toHaveLength(8);
+    // 预设模型升级为最新列表，退役的历史预设模型被剔除，用户自加的模型保留在尾部
     expect(settings.providers.find((provider) => provider.id === 'anthropic')).toMatchObject({
       apiKey: 'anthropic-key',
-      models: ['claude-custom'],
+      models: [...PROVIDER_PRESETS[0]!.models, 'claude-custom'],
     });
     expect(settings.providers.find((provider) => provider.id === 'deepseek')).toBeDefined();
     expect(settings.providers.find((provider) => provider.id === 'custom-local')).toEqual(
