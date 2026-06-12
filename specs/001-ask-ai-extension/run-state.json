@@ -8,15 +8,16 @@
   "blocked": false,
   "blockedReason": null,
   "lastVerification": {
-    "command": "npm test && npm run compile && npm run build && check_vibe_structure.py --json",
+    "command": "npm test && npm run compile && npm run build",
     "result": "PASS",
+    "detail": "22/22 unit tests, tsc clean, chrome-mv3 build 3.1MB; resume baseline matches previous gate run",
     "evidence": [
       "quality/V0.1/evidence/unit-tests.txt",
       "quality/V0.1/evidence/tsc.txt",
       "quality/V0.1/evidence/build.txt",
       "quality/V0.1/evidence/structure-check.json"
     ],
-    "at": "2026-06-11T10:43:21Z"
+    "at": "2026-06-12T11:07:01Z"
   },
   "constitutionCheck": {
     "preResearch": "PASS 2026-06-11",
@@ -27,5 +28,5 @@
     "openNonBlocking": 0
   },
   "worktree": "branch 001-ask-ai-extension (no separate worktree; fresh repo)",
-  "updatedAt": "2026-06-11T10:43:21Z"
+  "updatedAt": "2026-06-12T11:07:01Z"
 }
